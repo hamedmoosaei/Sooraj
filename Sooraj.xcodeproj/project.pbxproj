@@ -12,6 +12,8 @@
 		E81BC7E0213E5ADC00BE4114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7DE213E5ADC00BE4114 /* Main.storyboard */; };
 		E81BC7E2213E5ADD00BE4114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7E1213E5ADD00BE4114 /* Assets.xcassets */; };
 		E81BC7E5213E5ADD00BE4114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7E3213E5ADD00BE4114 /* LaunchScreen.storyboard */; };
+		E81BC7EF213E6A5A00BE4114 /* Splash-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7ED213E6A5A00BE4114 /* Splash-logo.png */; };
+		E81BC7F0213E6A5A00BE4114 /* BG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7EE213E6A5A00BE4114 /* BG.jpg */; };
 		F5C0878B6D5FDC62ABE97B8A /* Pods_Sooraj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C383A64CF11ED909449E03 /* Pods_Sooraj.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,10 @@
 		E81BC7E1213E5ADD00BE4114 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E81BC7E4213E5ADD00BE4114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E81BC7E6213E5ADD00BE4114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E81BC7ED213E6A5A00BE4114 /* Splash-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Splash-logo.png"; sourceTree = "<group>"; };
+		E81BC7EE213E6A5A00BE4114 /* BG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BG.jpg; sourceTree = "<group>"; };
+		E81BC7F2213E8D2E00BE4114 /* IRANSansMobile.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansMobile.ttf; sourceTree = "<group>"; };
+		E81BC7F3213E8D2E00BE4114 /* IRANSansMobile_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansMobile_Bold.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,8 @@
 		E81BC7D9213E5ADC00BE4114 /* Sooraj */ = {
 			isa = PBXGroup;
 			children = (
+				E81BC7F1213E8D1E00BE4114 /* fonts */,
+				E81BC7EC213E6A3500BE4114 /* images */,
 				E81BC7DA213E5ADC00BE4114 /* AppDelegate.swift */,
 				E81BC7DC213E5ADC00BE4114 /* ViewController.swift */,
 				E81BC7DE213E5ADC00BE4114 /* Main.storyboard */,
@@ -86,6 +94,24 @@
 				E81BC7E6213E5ADD00BE4114 /* Info.plist */,
 			);
 			path = Sooraj;
+			sourceTree = "<group>";
+		};
+		E81BC7EC213E6A3500BE4114 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				E81BC7EE213E6A5A00BE4114 /* BG.jpg */,
+				E81BC7ED213E6A5A00BE4114 /* Splash-logo.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		E81BC7F1213E8D1E00BE4114 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E81BC7F3213E8D2E00BE4114 /* IRANSansMobile_Bold.ttf */,
+				E81BC7F2213E8D2E00BE4114 /* IRANSansMobile.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,9 +174,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81BC7F0213E6A5A00BE4114 /* BG.jpg in Resources */,
 				E81BC7E5213E5ADD00BE4114 /* LaunchScreen.storyboard in Resources */,
 				E81BC7E2213E5ADD00BE4114 /* Assets.xcassets in Resources */,
 				E81BC7E0213E5ADC00BE4114 /* Main.storyboard in Resources */,
+				E81BC7EF213E6A5A00BE4114 /* Splash-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
