@@ -12,9 +12,13 @@
 		E81BC7E0213E5ADC00BE4114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7DE213E5ADC00BE4114 /* Main.storyboard */; };
 		E81BC7E2213E5ADD00BE4114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7E1213E5ADD00BE4114 /* Assets.xcassets */; };
 		E81BC7E5213E5ADD00BE4114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7E3213E5ADD00BE4114 /* LaunchScreen.storyboard */; };
+		F5C0878B6D5FDC62ABE97B8A /* Pods_Sooraj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C383A64CF11ED909449E03 /* Pods_Sooraj.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		54E671EE57FD776A17E2E39A /* Pods-Sooraj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sooraj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sooraj/Pods-Sooraj.debug.xcconfig"; sourceTree = "<group>"; };
+		D0C383A64CF11ED909449E03 /* Pods_Sooraj.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sooraj.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0761DCD88DEF227CB1333D4 /* Pods-Sooraj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sooraj.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sooraj/Pods-Sooraj.release.xcconfig"; sourceTree = "<group>"; };
 		E81BC7D7213E5ADC00BE4114 /* Sooraj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sooraj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E81BC7DA213E5ADC00BE4114 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E81BC7DC213E5ADC00BE4114 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C0878B6D5FDC62ABE97B8A /* Pods_Sooraj.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		945B13128C922D503FA2C9BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0C383A64CF11ED909449E03 /* Pods_Sooraj.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9AF83E29321C280C77F35D18 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54E671EE57FD776A17E2E39A /* Pods-Sooraj.debug.xcconfig */,
+				E0761DCD88DEF227CB1333D4 /* Pods-Sooraj.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E81BC7CE213E5ADC00BE4114 = {
 			isa = PBXGroup;
 			children = (
 				E81BC7D9213E5ADC00BE4114 /* Sooraj */,
 				E81BC7D8213E5ADC00BE4114 /* Products */,
+				9AF83E29321C280C77F35D18 /* Pods */,
+				945B13128C922D503FA2C9BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E81BC7E9213E5ADD00BE4114 /* Build configuration list for PBXNativeTarget "Sooraj" */;
 			buildPhases = (
+				B785A0BF186025BB1FC4736D /* [CP] Check Pods Manifest.lock */,
 				E81BC7D3213E5ADC00BE4114 /* Sources */,
 				E81BC7D4213E5ADC00BE4114 /* Frameworks */,
 				E81BC7D5213E5ADC00BE4114 /* Resources */,
+				96F5666363F0708A20E10459 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +155,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		96F5666363F0708A20E10459 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Sooraj/Pods-Sooraj-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sooraj/Pods-Sooraj-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B785A0BF186025BB1FC4736D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sooraj-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E81BC7D3213E5ADC00BE4114 /* Sources */ = {
@@ -278,16 +343,18 @@
 		};
 		E81BC7EA213E5ADD00BE4114 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54E671EE57FD776A17E2E39A /* Pods-Sooraj.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2RJFX5PSNK;
 				INFOPLIST_FILE = Sooraj/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.me.Sooraj;
+				PRODUCT_BUNDLE_IDENTIFIER = project.silverage.Sooraj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -296,16 +363,18 @@
 		};
 		E81BC7EB213E5ADD00BE4114 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0761DCD88DEF227CB1333D4 /* Pods-Sooraj.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2RJFX5PSNK;
 				INFOPLIST_FILE = Sooraj/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.me.Sooraj;
+				PRODUCT_BUNDLE_IDENTIFIER = project.silverage.Sooraj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
