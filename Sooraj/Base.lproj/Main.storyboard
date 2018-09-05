@@ -84,10 +84,15 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hWc-Ws-xHp">
+                                <rect key="frame" x="169" y="277" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hWc-Ws-xHp" firstAttribute="top" secondItem="j86-pD-ApP" secondAttribute="bottom" constant="8" id="2aL-J0-792"/>
                             <constraint firstItem="j86-pD-ApP" firstAttribute="top" secondItem="yea-nl-JkQ" secondAttribute="bottom" constant="8" id="2kl-po-pLz"/>
+                            <constraint firstItem="hWc-Ws-xHp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3BW-dn-q9U"/>
                             <constraint firstItem="yLV-h5-yLE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7Mh-Zt-rel"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xaX-6s-Kso" secondAttribute="trailing" constant="30" id="E7f-6e-ZSH"/>
                             <constraint firstItem="xaX-6s-Kso" firstAttribute="top" secondItem="nBi-9h-RMg" secondAttribute="bottom" constant="15" id="HtK-kd-N94"/>
@@ -112,6 +117,7 @@
                         <outlet property="mobileLabel" destination="nBi-9h-RMg" id="kqS-ef-btK"/>
                         <outlet property="mobileText" destination="xaX-6s-Kso" id="ucW-wm-zKH"/>
                         <outlet property="soorajIcon" destination="yea-nl-JkQ" id="eMH-Pr-kaL"/>
+                        <outlet property="waiting" destination="hWc-Ws-xHp" id="t8l-Jf-wX6"/>
                         <segue destination="IkV-TY-bB4" kind="show" identifier="verifySegue" id="GH5-LQ-2oP"/>
                     </connections>
                 </viewController>
