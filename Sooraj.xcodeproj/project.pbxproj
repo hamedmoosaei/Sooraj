@@ -16,6 +16,8 @@
 		E81BC7F0213E6A5A00BE4114 /* BG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7EE213E6A5A00BE4114 /* BG.jpg */; };
 		E8BE7E19213FB84200FD3E7A /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE7E18213FB84200FD3E7A /* VerifyViewController.swift */; };
 		E8BE7E1D213FD6CB00FD3E7A /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE7E1C213FD6CB00FD3E7A /* KeyboardLayoutConstraint.swift */; };
+		E8BE7E1E213FE22D00FD3E7A /* IRANSansMobile_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7F3213E8D2E00BE4114 /* IRANSansMobile_Bold.ttf */; };
+		E8BE7E1F213FE23000FD3E7A /* IRANSansMobile.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7F2213E8D2E00BE4114 /* IRANSansMobile.ttf */; };
 		F5C0878B6D5FDC62ABE97B8A /* Pods_Sooraj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C383A64CF11ED909449E03 /* Pods_Sooraj.framework */; };
 /* End PBXBuildFile section */
 
@@ -181,9 +183,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E81BC7F0213E6A5A00BE4114 /* BG.jpg in Resources */,
+				E8BE7E1F213FE23000FD3E7A /* IRANSansMobile.ttf in Resources */,
 				E81BC7E5213E5ADD00BE4114 /* LaunchScreen.storyboard in Resources */,
 				E81BC7E2213E5ADD00BE4114 /* Assets.xcassets in Resources */,
 				E81BC7E0213E5ADC00BE4114 /* Main.storyboard in Resources */,
+				E8BE7E1E213FE22D00FD3E7A /* IRANSansMobile_Bold.ttf in Resources */,
 				E81BC7EF213E6A5A00BE4114 /* Splash-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
