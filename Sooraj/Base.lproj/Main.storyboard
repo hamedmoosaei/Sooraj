@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abo-Sa-BS0" customClass="DesignableButton" customModule="Sooraj" customModuleProvider="target">
-                                <rect key="frame" x="60" y="912.66666666666663" width="255" height="35"/>
+                                <rect key="frame" x="60" y="914.33333333333337" width="255" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="IRANSansMobile-Bold" family="IRANSansMobile" pointSize="19"/>
                                 <state key="normal" title="دریافت کد تایید">
@@ -56,13 +56,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="برای ورود، شماره همراه خود را وارد نمایید." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBi-9h-RMg">
-                                <rect key="frame" x="0.0" y="811" width="335" height="18.666666666666629"/>
+                                <rect key="frame" x="0.0" y="811" width="335" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="— — — — —" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xaX-6s-Kso" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
-                                <rect key="frame" x="30" y="844.66666666666663" width="315" height="40"/>
+                                <rect key="frame" x="30" y="846.33333333333337" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="1NJ-Rd-2t9"/>
                                 </constraints>
