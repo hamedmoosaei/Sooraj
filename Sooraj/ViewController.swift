@@ -117,7 +117,7 @@ extension UIView {
 }
 
 class ViewController: UIViewController , UITextFieldDelegate {
-    
+    var keyboardheight = Int()
     @IBOutlet weak var soorajIcon: UIImageView!
     
     @IBOutlet weak var mobileBtn: DesignableButton!
@@ -125,6 +125,8 @@ class ViewController: UIViewController , UITextFieldDelegate {
     @IBOutlet weak var mobileLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+       // NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         mobileText.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -132,6 +134,13 @@ class ViewController: UIViewController , UITextFieldDelegate {
         self.comeUpanimation()
     }
     
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//            keyboardheight = -1 * Int(keyboardSize.height)
+//            print(keyboardheight)
+//            }
+//    }
+   
     func checkErrors(){
         if mobileText.text?.count != 11 {
             mobileLabel.textColor = UIColor.red

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IkV-TY-bB4">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -112,6 +112,7 @@
                         <outlet property="mobileLabel" destination="nBi-9h-RMg" id="kqS-ef-btK"/>
                         <outlet property="mobileText" destination="xaX-6s-Kso" id="ucW-wm-zKH"/>
                         <outlet property="soorajIcon" destination="yea-nl-JkQ" id="eMH-Pr-kaL"/>
+                        <segue destination="IkV-TY-bB4" kind="show" identifier="verifySegue" id="GH5-LQ-2oP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -139,15 +140,14 @@
                                 <color key="textColor" red="1" green="0.98110285760000004" blue="0.95098039219999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="کد تایید ارسالی به شماره ۰۹۲۲۶۶۸۲۵۹۴ را وارد نمایید." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AhT-Tu-EeA">
-                                <rect key="frame" x="20" y="586" width="335" height="20.333333333333371"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="کد تایید ارسالی به شماره ۰۹۲۲۶۶۸۲۵۹۴ را وارد نمایید." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AhT-Tu-EeA">
+                                <rect key="frame" x="0.0" y="574.33333333333337" width="335" height="17.666666666666629"/>
+                                <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="— — — — —" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ahw-Mp-oUJ" userLabel="code textField" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
-                                <rect key="frame" x="60" y="639" width="315" height="40"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="— — — — —" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ahw-Mp-oUJ" userLabel="code textField" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
+                                <rect key="frame" x="30" y="602" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="yCT-Ov-KoR"/>
                                 </constraints>
@@ -169,9 +169,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vf5-K0-jdY" customClass="DesignableButton" customModule="Sooraj" customModuleProvider="target">
-                                <rect key="frame" x="73" y="687" width="255" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vf5-K0-jdY" customClass="DesignableButton" customModule="Sooraj" customModuleProvider="target">
+                                <rect key="frame" x="60" y="672" width="255" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="IRANSansMobile-Bold" family="IRANSansMobile" pointSize="19"/>
                                 <state key="normal" title="ورود">
@@ -182,30 +181,18 @@
                                         <real key="value" value="17"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="enterAction:" destination="IkV-TY-bB4" eventType="touchUpInside" id="DLJ-yo-wUr"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ویرایش" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmA-Dh-5Y3">
-                                <rect key="frame" x="73" y="747" width="52" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.8901960784313725" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="نام و نام خانوادگی" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu3-vR-oCr">
-                                <rect key="frame" x="21" y="414" width="335" height="20.333333333333371"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="کد معرف" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puj-lP-oeT">
+                                <rect key="frame" x="0.0" y="484" width="335" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="کد معرف" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puj-lP-oeT">
-                                <rect key="frame" x="20" y="486" width="335" height="20.333333333333371"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="— — — — —" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T8c-pG-nXW" userLabel="name textField" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
-                                <rect key="frame" x="52" y="442" width="315" height="40"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="— — — — —" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T8c-pG-nXW" userLabel="name textField" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
+                                <rect key="frame" x="30" y="424" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="R6p-rp-cND"/>
                                 </constraints>
@@ -227,8 +214,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="— — — — —" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sce-3Y-huz" userLabel="moaref textField" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
-                                <rect key="frame" x="44" y="521" width="315" height="40"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="— — — — —" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sce-3Y-huz" userLabel="moaref textField" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
+                                <rect key="frame" x="30" y="514.33333333333337" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="GHo-pO-PNN"/>
                                 </constraints>
@@ -250,24 +237,77 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ارسال مجدد کد تایید (۵۴)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nm7-is-jZ0">
-                                <rect key="frame" x="163" y="748" width="180" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="17"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1a-21-TYg">
+                                <rect key="frame" x="40" y="733" width="79" height="30"/>
+                                <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="14"/>
+                                <state key="normal" title="ویرایش شماره">
+                                    <color key="titleColor" red="1" green="0.89019607840000003" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="2GH-e4-5E1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwd-g6-Zog">
+                                <rect key="frame" x="187" y="733" width="148" height="30"/>
+                                <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="14"/>
+                                <state key="normal" title="ارسال مجدد کد تایید (۵۴)">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="resendAction:" destination="IkV-TY-bB4" eventType="touchUpInside" id="DbJ-Zf-6a3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نام و نام خانوادگی" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu3-vR-oCr">
+                                <rect key="frame" x="0.0" y="393.66666666666669" width="335" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Vf5-K0-jdY" firstAttribute="leading" secondItem="GLG-R5-Bzs" secondAttribute="leading" constant="60" id="1ZQ-Nh-0OD"/>
+                            <constraint firstItem="AhT-Tu-EeA" firstAttribute="top" secondItem="Sce-3Y-huz" secondAttribute="bottom" constant="20" id="2g1-tw-ztn"/>
+                            <constraint firstItem="zu3-vR-oCr" firstAttribute="leading" secondItem="GLG-R5-Bzs" secondAttribute="leading" id="40U-4J-MSI"/>
+                            <constraint firstItem="A1a-21-TYg" firstAttribute="top" secondItem="Vf5-K0-jdY" secondAttribute="bottom" constant="25" id="4xV-lc-E8L"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="bottom" secondItem="Nwd-g6-Zog" secondAttribute="bottom" constant="15" id="5cZ-ke-lLC"/>
+                            <constraint firstItem="Vf5-K0-jdY" firstAttribute="top" secondItem="Ahw-Mp-oUJ" secondAttribute="bottom" constant="30" id="644-e5-VMO"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="trailing" secondItem="Ahw-Mp-oUJ" secondAttribute="trailing" constant="30" id="9Zw-D3-iCD"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="bottom" secondItem="A1a-21-TYg" secondAttribute="bottom" constant="15" id="FCf-bU-vhW"/>
+                            <constraint firstItem="Ahw-Mp-oUJ" firstAttribute="leading" secondItem="GLG-R5-Bzs" secondAttribute="leading" constant="30" id="Lfq-1i-f1q"/>
                             <constraint firstItem="6q9-jW-1K3" firstAttribute="centerX" secondItem="UfH-MG-0b9" secondAttribute="centerX" id="MPT-pT-dDN"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="trailing" secondItem="Sce-3Y-huz" secondAttribute="trailing" constant="30" id="Mbv-dH-FFB"/>
+                            <constraint firstItem="AhT-Tu-EeA" firstAttribute="leading" secondItem="GLG-R5-Bzs" secondAttribute="leading" id="RBr-5f-woP"/>
                             <constraint firstItem="dpb-UE-Wy1" firstAttribute="centerX" secondItem="UfH-MG-0b9" secondAttribute="centerX" id="Sg6-q1-AjN"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="trailing" secondItem="puj-lP-oeT" secondAttribute="trailing" constant="40" id="ZdM-yf-4fn"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="trailing" secondItem="AhT-Tu-EeA" secondAttribute="trailing" constant="40" id="Zf8-Da-5A0"/>
+                            <constraint firstItem="T8c-pG-nXW" firstAttribute="top" secondItem="zu3-vR-oCr" secondAttribute="bottom" constant="10" id="aTG-tp-8aX"/>
+                            <constraint firstItem="Ahw-Mp-oUJ" firstAttribute="top" secondItem="AhT-Tu-EeA" secondAttribute="bottom" constant="10" id="b4D-JS-vKh"/>
+                            <constraint firstItem="puj-lP-oeT" firstAttribute="leading" secondItem="GLG-R5-Bzs" secondAttribute="leading" id="bGz-EK-sW8"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="trailing" secondItem="T8c-pG-nXW" secondAttribute="trailing" constant="30" id="brw-xw-b0z"/>
+                            <constraint firstItem="Sce-3Y-huz" firstAttribute="leading" secondItem="GLG-R5-Bzs" secondAttribute="leading" constant="30" id="cpk-KP-MR5"/>
+                            <constraint firstItem="T8c-pG-nXW" firstAttribute="leading" secondItem="GLG-R5-Bzs" secondAttribute="leading" constant="30" id="ekp-yE-UvC"/>
                             <constraint firstItem="6q9-jW-1K3" firstAttribute="top" secondItem="GLG-R5-Bzs" secondAttribute="top" multiplier="2" constant="1" id="f86-nP-JbL"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="trailing" secondItem="zu3-vR-oCr" secondAttribute="trailing" constant="40" id="faK-RK-sXt"/>
+                            <constraint firstItem="puj-lP-oeT" firstAttribute="top" secondItem="T8c-pG-nXW" secondAttribute="bottom" constant="20" id="fs4-pt-wgo"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="trailing" secondItem="Nwd-g6-Zog" secondAttribute="trailing" constant="40" id="gB3-H6-zYa"/>
+                            <constraint firstItem="Sce-3Y-huz" firstAttribute="top" secondItem="puj-lP-oeT" secondAttribute="bottom" constant="10" id="lmt-Sn-alf"/>
                             <constraint firstItem="dpb-UE-Wy1" firstAttribute="top" secondItem="6q9-jW-1K3" secondAttribute="bottom" constant="8" id="sgG-ux-xY3"/>
+                            <constraint firstItem="Nwd-g6-Zog" firstAttribute="top" secondItem="Vf5-K0-jdY" secondAttribute="bottom" constant="25" id="uTb-Ee-RoP"/>
+                            <constraint firstItem="A1a-21-TYg" firstAttribute="leading" secondItem="GLG-R5-Bzs" secondAttribute="leading" constant="40" id="v9s-Gv-xUb"/>
+                            <constraint firstItem="GLG-R5-Bzs" firstAttribute="trailing" secondItem="Vf5-K0-jdY" secondAttribute="trailing" constant="60" id="y6H-NB-8gA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GLG-R5-Bzs"/>
                     </view>
                     <connections>
+                        <outlet property="codeLabel" destination="AhT-Tu-EeA" id="Op2-h0-L8i"/>
+                        <outlet property="codeTextField" destination="Ahw-Mp-oUJ" id="VMv-jB-sfb"/>
+                        <outlet property="enterButton" destination="Vf5-K0-jdY" id="YLM-dM-uFi"/>
+                        <outlet property="nameLabel" destination="zu3-vR-oCr" id="IMU-1o-d05"/>
+                        <outlet property="nameTextField" destination="T8c-pG-nXW" id="pRz-6x-a33"/>
+                        <outlet property="reagentLabel" destination="puj-lP-oeT" id="Ic8-7v-oM2"/>
+                        <outlet property="reagentTextField" destination="Sce-3Y-huz" id="Jfa-vG-huB"/>
+                        <outlet property="resendButton" destination="Nwd-g6-Zog" id="H8G-xp-vDy"/>
                         <outlet property="soorajIcon" destination="6q9-jW-1K3" id="jvu-76-wGJ"/>
                     </connections>
                 </viewController>

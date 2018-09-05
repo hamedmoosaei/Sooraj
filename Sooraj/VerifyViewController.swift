@@ -9,7 +9,29 @@
 import UIKit
 
 class VerifyViewController: UIViewController {
-
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var nameTextField: DesignableTextField!
+    
+    @IBOutlet weak var reagentLabel: UILabel!
+    
+    @IBOutlet weak var reagentTextField: DesignableTextField!
+    
+    @IBOutlet weak var codeLabel: UILabel!
+    
+    @IBOutlet weak var codeTextField: DesignableTextField!
+    
+    @IBAction func enterAction(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var enterButton: DesignableButton!
+    
+    @IBOutlet weak var resendButton: UIButton!
+    
+    @IBAction func resendAction(_ sender: Any) {
+    }
+    
+    
     @IBOutlet weak var soorajIcon: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
