@@ -135,9 +135,12 @@ class ViewController: UIViewController , UITextFieldDelegate {
             mobileLabel.textColor = UIColor.red
             mobileText.borderColor = UIColor.red
             mobileLabel.text = "لطفا شماره خود را به درستی وارد نمایید."
+        }else{
+            mobileLabel.textColor = UIColor.white
+            mobileText.borderColor = UIColor.white
         }
     }
-    ////////joooooon
+
     @IBAction func buttonTapped(_ sender: Any) {
         checkErrors()
     }
