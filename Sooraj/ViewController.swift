@@ -141,6 +141,7 @@ class ViewController: UIViewController , UITextFieldDelegate {
     @IBAction func buttonTapped(_ sender: Any) {
         checkErrors()
     }
+    
     private func comeUpanimation(){
         UIView.animate(withDuration: 2, delay: 0, options: [ .curveEaseOut ], animations: {
             self.mobileLabel.transform = CGAffineTransform(translationX: 0, y: -200)
