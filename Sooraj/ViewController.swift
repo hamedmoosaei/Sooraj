@@ -117,7 +117,7 @@ extension UIView {
 }
 
 class ViewController: UIViewController , UITextFieldDelegate {
-    
+    var keyboardheight = Int()
     @IBOutlet weak var soorajIcon: UIImageView!
     
     @IBOutlet weak var mobileBtn: DesignableButton!
@@ -125,11 +125,20 @@ class ViewController: UIViewController , UITextFieldDelegate {
     @IBOutlet weak var mobileLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+       // NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         mobileText.delegate = self
         soorajIcon.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
         self.comeUpanimation()
     }
     
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//            keyboardheight = -1 * Int(keyboardSize.height)
+//            print(keyboardheight)
+//            }
+//    }
+   
     func checkErrors(){
         if mobileText.text?.count != 11 {
             mobileLabel.textColor = UIColor.red
@@ -159,7 +168,8 @@ class ViewController: UIViewController , UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        moveTextField(textField, moveDistance: -250, up: true)
+        
+        moveTextField(textField, moveDistance: keyboardheight , up: true)
         if mobileText.placeholder == "— — — — —"{
             mobileText.placeholder = ""
             mobileBtn.isEnabled = true
@@ -169,7 +179,8 @@ class ViewController: UIViewController , UITextFieldDelegate {
     
     // Finish Editing The Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
-        moveTextField(textField, moveDistance: -250 , up: false)
+       moveTextField(textField, moveDistance: keyboardheight , up: false)
+        print(keyboardheight)
     }
     
     // Hide the keyboard when the return key pressed
