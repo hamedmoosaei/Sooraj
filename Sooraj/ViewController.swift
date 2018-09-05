@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 @IBDesignable
 class DesignableTextField: UITextField {
@@ -125,8 +126,8 @@ class ViewController: UIViewController , UITextFieldDelegate {
     @IBOutlet weak var mobileLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-       // NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        // NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         mobileText.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -134,13 +135,13 @@ class ViewController: UIViewController , UITextFieldDelegate {
         self.comeUpanimation()
     }
     
-//    @objc func keyboardWillShow(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//            keyboardheight = -1 * Int(keyboardSize.height)
-//            print(keyboardheight)
-//            }
-//    }
-   
+    //    @objc func keyboardWillShow(notification: NSNotification) {
+    //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+    //            keyboardheight = -1 * Int(keyboardSize.height)
+    //            print(keyboardheight)
+    //            }
+    //    }
+    
     func checkErrors(){
         if mobileText.text?.count != 11 {
             mobileLabel.textColor = UIColor.red
@@ -151,9 +152,30 @@ class ViewController: UIViewController , UITextFieldDelegate {
             mobileText.borderColor = UIColor.white
         }
     }
-
+    
     @IBAction func buttonTapped(_ sender: Any) {
         checkErrors()
+        let parameter: Parameters = ["mobile": mobileText.text!]
+        Alamofire.request("http://silverbackend.ir/api/users/send/otp", method: .post, parameters: parameter , encoding: JSONEncoding.default, headers: nil).validate().responseJSON { response in
+            switch response.result{
+            case .success:
+                print(response.result.value!)
+                self.performSegue(withIdentifier: "verifySegue", sender: self)
+            case .failure(let error):
+                print(error)
+                if response.result.value != nil{
+                    let json = JSON(response.result.value!)
+                    self.mobileLabel.textColor = UIColor.red
+                    self.mobileLabel.text = json["message"].stringValue
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? VerifyViewController{
+            vc.mobile = mobileText.text!
+        }
     }
     
     private func comeUpanimation(){
@@ -170,7 +192,7 @@ class ViewController: UIViewController , UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-       // moveTextField(textField, moveDistance: -250, up: true)
+        // moveTextField(textField, moveDistance: -250, up: true)
         if mobileText.placeholder == "— — — — —"{
             mobileText.placeholder = ""
             mobileBtn.isEnabled = true
@@ -180,7 +202,7 @@ class ViewController: UIViewController , UITextFieldDelegate {
     
     // Finish Editing The Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
-       // moveTextField(textField, moveDistance: -250 , up: false)
+        // moveTextField(textField, moveDistance: -250 , up: false)
     }
     
     // Hide the keyboard when the return key pressed

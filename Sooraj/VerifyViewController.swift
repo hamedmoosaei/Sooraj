@@ -9,6 +9,9 @@
 import UIKit
 
 class VerifyViewController: UIViewController {
+    
+    var mobile = String()
+    
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var nameTextField: DesignableTextField!
@@ -22,6 +25,7 @@ class VerifyViewController: UIViewController {
     @IBOutlet weak var codeTextField: DesignableTextField!
     
     @IBAction func enterAction(_ sender: Any) {
+        
     }
     
     @IBOutlet weak var enterButton: DesignableButton!
@@ -29,6 +33,7 @@ class VerifyViewController: UIViewController {
     @IBOutlet weak var resendButton: UIButton!
     
     @IBAction func resendAction(_ sender: Any) {
+        
     }
     
     
