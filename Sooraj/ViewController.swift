@@ -119,30 +119,39 @@ extension UIView {
 
 class ViewController: UIViewController , UITextFieldDelegate {
     var keyboardheight = Int()
-    @IBOutlet weak var soorajIcon: UIImageView!
     
+    @IBOutlet weak var soorajIcon: UIImageView!
+    @IBOutlet weak var waiting: UIActivityIndicatorView!
     @IBOutlet weak var mobileBtn: DesignableButton!
     @IBOutlet weak var mobileText: DesignableTextField!
     @IBOutlet weak var mobileLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        waiting.startAnimating()
+        if (UserDefaults.standard.object(forKey: "user") != nil){
+            //performSegue(withIdentifier: "LoggedIn", sender: self)
+        }else{
+            waiting.stopAnimating()
+            waiting.alpha = 0
+            self.comeUpanimation()
+        }
         
-        // NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         mobileText.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         soorajIcon.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
-        self.comeUpanimation()
+    }
+ 
+    func showErrors(){
+        mobileLabel.textColor = UIColor.red
+        mobileText.borderColor = UIColor.red
+        mobileLabel.text = "لطفا شماره خود را به درستی وارد نمایید."
+        waiting.stopAnimating()
+        waiting.alpha = 0
     }
     
-    //    @objc func keyboardWillShow(notification: NSNotification) {
-    //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-    //            keyboardheight = -1 * Int(keyboardSize.height)
-    //            print(keyboardheight)
-    //            }
-    //    }
-    
-    func checkErrors(){
+    @IBAction func buttonTapped(_ sender: Any) {
+        waiting.alpha = 1
+        waiting.startAnimating()
         if mobileText.text?.count != 11 {
             mobileLabel.textColor = UIColor.red
             mobileText.borderColor = UIColor.red
@@ -151,25 +160,24 @@ class ViewController: UIViewController , UITextFieldDelegate {
         }else{
             mobileLabel.textColor = UIColor.white
             mobileText.borderColor = UIColor.white
-        }
-    }
-    
-    @IBAction func buttonTapped(_ sender: Any) {
-        checkErrors()
-        let parameter: Parameters = ["mobile": mobileText.text!]
-        Alamofire.request("http://silverbackend.ir/api/users/send/otp", method: .post, parameters: parameter , encoding: JSONEncoding.default, headers: nil).validate().responseJSON { response in
-            switch response.result{
-            case .success:
-                print(response.result.value!)
-                self.performSegue(withIdentifier: "verifySegue", sender: self)
-            case .failure(let error):
-                print(error)
-                if response.result.value != nil{
-                    let json = JSON(response.result.value!)
-                    self.mobileLabel.textColor = UIColor.red
-                    self.mobileLabel.text = json["message"].stringValue
+            let parameter: Parameters = ["mobile": mobileText.text!]
+            Alamofire.request("http://silverbackend.ir/api/users/send/otp", method: .post, parameters: parameter , encoding: JSONEncoding.default, headers: nil).validate().responseJSON { response in
+                switch response.result{
+                case .success:
+                    print(response.result.value!)
+                    self.performSegue(withIdentifier: "verifySegue", sender: self)
+                case .failure(let error):
+                    print(error)
+                    self.waiting.stopAnimating()
+                    self.waiting.alpha = 0
+                    if response.result.value != nil{
+                        let json = JSON(response.result.value!)
+                        self.mobileLabel.textColor = UIColor.red
+                        self.mobileLabel.text = json["message"].stringValue
+                    }
                 }
             }
+            
         }
     }
     
