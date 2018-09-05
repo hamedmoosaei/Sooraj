@@ -116,32 +116,71 @@ extension UIView {
     }
 }
 
-
-extension UIView {
-    func rotate360Degrees(duration: CFTimeInterval = 2) {
-        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
-        rotateAnimation.fromValue = 0.0
-        rotateAnimation.toValue = CGFloat(Double.pi * 2)
-        rotateAnimation.isRemovedOnCompletion = false
-        rotateAnimation.duration = duration
-        rotateAnimation.repeatCount=Float.infinity
-        self.layer.add(rotateAnimation, forKey: nil)
-    }
-}
-class ViewController: UIViewController {
-
+class ViewController: UIViewController , UITextFieldDelegate {
+    
     @IBOutlet weak var soorajIcon: UIImageView!
+    
+    @IBOutlet weak var mobileBtn: DesignableButton!
+    @IBOutlet weak var mobileText: DesignableTextField!
+    @IBOutlet weak var mobileLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        mobileText.delegate = self
         soorajIcon.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
-        
-        UIView.animate(withDuration: 1, delay: 0, options: [.repeat], animations: {
-            self.soorajIcon.rotate360Degrees()
-        }, completion: nil )
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) {
-            self.soorajIcon.layer.removeAllAnimations()
+        self.comeUpanimation()
+    }
+    
+    func checkErrors(){
+        if mobileText.text?.count != 11 {
+            mobileText.text = ""
         }
     }
+    
+    private func comeUpanimation(){
+        UIView.animate(withDuration: 2, delay: 0, options: [ .curveEaseOut ], animations: {
+            self.mobileLabel.transform = CGAffineTransform(translationX: 0, y: -200)
+            self.mobileText.transform = CGAffineTransform(translationX: 0, y: -200)
+            self.mobileBtn.transform = CGAffineTransform(translationX: 0, y: -200)
+        }, completion: nil)
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        moveTextField(textField, moveDistance: -250, up: true)
+        if mobileText.placeholder == "— — — — —"{
+            mobileText.placeholder = ""
+            mobileBtn.isEnabled = true
+            mobileBtn.alpha = 1
+        }
+    }
+    
+    // Finish Editing The Text Field
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        moveTextField(textField, moveDistance: -250 , up: false)
+    }
+    
+    // Hide the keyboard when the return key pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Move the text field in a pretty animation!
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+    
 }
 
 
