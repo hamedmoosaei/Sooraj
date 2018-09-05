@@ -14,6 +14,7 @@
 		E81BC7E5213E5ADD00BE4114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7E3213E5ADD00BE4114 /* LaunchScreen.storyboard */; };
 		E81BC7EF213E6A5A00BE4114 /* Splash-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7ED213E6A5A00BE4114 /* Splash-logo.png */; };
 		E81BC7F0213E6A5A00BE4114 /* BG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E81BC7EE213E6A5A00BE4114 /* BG.jpg */; };
+		E8BE7E19213FB84200FD3E7A /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BE7E18213FB84200FD3E7A /* VerifyViewController.swift */; };
 		F5C0878B6D5FDC62ABE97B8A /* Pods_Sooraj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C383A64CF11ED909449E03 /* Pods_Sooraj.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		E81BC7EE213E6A5A00BE4114 /* BG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BG.jpg; sourceTree = "<group>"; };
 		E81BC7F2213E8D2E00BE4114 /* IRANSansMobile.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansMobile.ttf; sourceTree = "<group>"; };
 		E81BC7F3213E8D2E00BE4114 /* IRANSansMobile_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansMobile_Bold.ttf; sourceTree = "<group>"; };
+		E8BE7E18213FB84200FD3E7A /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				E81BC7DA213E5ADC00BE4114 /* AppDelegate.swift */,
 				E81BC7DC213E5ADC00BE4114 /* ViewController.swift */,
 				E81BC7DE213E5ADC00BE4114 /* Main.storyboard */,
+				E8BE7E18213FB84200FD3E7A /* VerifyViewController.swift */,
 				E81BC7E1213E5ADD00BE4114 /* Assets.xcassets */,
 				E81BC7E3213E5ADD00BE4114 /* LaunchScreen.storyboard */,
 				E81BC7E6213E5ADD00BE4114 /* Info.plist */,
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8BE7E19213FB84200FD3E7A /* VerifyViewController.swift in Sources */,
 				E81BC7DD213E5ADC00BE4114 /* ViewController.swift in Sources */,
 				E81BC7DB213E5ADC00BE4114 /* AppDelegate.swift in Sources */,
 			);
