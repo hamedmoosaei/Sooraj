@@ -39,7 +39,7 @@
                                 <color key="textColor" red="1" green="0.98110285760000004" blue="0.95098039219999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abo-Sa-BS0" customClass="DesignableButton" customModule="Sooraj" customModuleProvider="target">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abo-Sa-BS0" customClass="DesignableButton" customModule="Sooraj" customModuleProvider="target">
                                 <rect key="frame" x="60" y="914.33333333333337" width="255" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="IRANSansMobile-Bold" family="IRANSansMobile" pointSize="19"/>
@@ -58,14 +58,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="- - - - - - - - - - - " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xaX-6s-Kso" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="— — — — —" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xaX-6s-Kso" customClass="DesignableTextField" customModule="Sooraj" customModuleProvider="target">
                                 <rect key="frame" x="30" y="846.33333333333337" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="1NJ-Rd-2t9"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="IRANSansMobile" family="IRANSansMobile" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="17"/>
@@ -105,6 +105,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="mobileBtn" destination="abo-Sa-BS0" id="iHF-FU-IHz"/>
+                        <outlet property="mobileLabel" destination="nBi-9h-RMg" id="kqS-ef-btK"/>
+                        <outlet property="mobileText" destination="xaX-6s-Kso" id="ucW-wm-zKH"/>
                         <outlet property="soorajIcon" destination="yea-nl-JkQ" id="eMH-Pr-kaL"/>
                     </connections>
                 </viewController>
