@@ -132,8 +132,14 @@ class ViewController: UIViewController , UITextFieldDelegate {
     
     func checkErrors(){
         if mobileText.text?.count != 11 {
-            mobileText.text = ""
+            mobileLabel.textColor = UIColor.red
+            mobileText.borderColor = UIColor.red
+            mobileLabel.text = "لطفا شماره خود را به درستی وارد نمایید."
         }
+    }
+    ////////joooooon
+    @IBAction func buttonTapped(_ sender: Any) {
+        checkErrors()
     }
     
     private func comeUpanimation(){
