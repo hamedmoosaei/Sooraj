@@ -120,8 +120,8 @@ extension UIView {
 class ViewController: UIViewController , UITextFieldDelegate {
     var keyboardheight = Int()
     
-    @IBOutlet weak var soorajIcon: UIImageView!
     @IBOutlet weak var waiting: UIActivityIndicatorView!
+    @IBOutlet weak var soorajIcon: UIImageView!
     @IBOutlet weak var mobileBtn: DesignableButton!
     @IBOutlet weak var mobileText: DesignableTextField!
     @IBOutlet weak var mobileLabel: UILabel!

@@ -13,6 +13,8 @@ import SwiftyJSON
 class VerifyViewController: UIViewController {
     
     var mobile = String()
+    var timer = Timer()
+    var time = 60
     
     @IBOutlet weak var soorajIcon: UIImageView!
     
@@ -32,8 +34,23 @@ class VerifyViewController: UIViewController {
     
     @IBOutlet weak var resendButton: UIButton!
     
+    override func viewDidAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.decreaseTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func decreaseTime(){
+        if time > 0{
+            time -= 1
+            
+        }else{
+            timer.invalidate()
+            
+            resendButton.isEnabled = true
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.optCodeText()
         soorajIcon.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
         
     }
@@ -85,6 +102,25 @@ class VerifyViewController: UIViewController {
             
         }
     }
+    
+    func optCodeText(){
+        let attrs1 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 14), NSAttributedStringKey.foregroundColor : UIColor.white]
+        
+        let attrs2 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 14), NSAttributedStringKey.foregroundColor : UIColor.yellow]
+        
+        let attrs3 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 14), NSAttributedStringKey.foregroundColor : UIColor.white]
+        
+        let attributedString1 = NSMutableAttributedString(string:"کد تاییدی ارسالی به شماره ", attributes:(attrs1 as Any as! [NSAttributedStringKey : Any]))
+        
+        let attributedString2 = NSMutableAttributedString(string: mobile, attributes:attrs2 as Any as? [NSAttributedStringKey : Any])
+        
+        let attributedString3 = NSMutableAttributedString(string:" را وارد نمایید.", attributes:(attrs3 as Any as! [NSAttributedStringKey : Any]))
+        
+        attributedString1.append(attributedString2)
+        attributedString1.append(attributedString3)
+        codeLabel.attributedText = attributedString1
+    }
+    
     
     @IBAction func resendAction(_ sender: Any) {
         
