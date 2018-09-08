@@ -120,8 +120,8 @@ extension UIView {
 class ViewController: UIViewController , UITextFieldDelegate {
     var keyboardheight = Int()
     
-    @IBOutlet weak var soorajIcon: UIImageView!
     @IBOutlet weak var waiting: UIActivityIndicatorView!
+    @IBOutlet weak var soorajIcon: UIImageView!
     @IBOutlet weak var mobileBtn: DesignableButton!
     @IBOutlet weak var mobileText: DesignableTextField!
     @IBOutlet weak var mobileLabel: UILabel!
@@ -153,10 +153,7 @@ class ViewController: UIViewController , UITextFieldDelegate {
         waiting.alpha = 1
         waiting.startAnimating()
         if mobileText.text?.count != 11 {
-            mobileLabel.textColor = UIColor.red
-            mobileText.borderColor = UIColor.red
-            mobileLabel.text = "لطفا شماره خود را به درستی وارد نمایید."
-            
+            showErrors()
         }else{
             mobileLabel.textColor = UIColor.white
             mobileText.borderColor = UIColor.white
