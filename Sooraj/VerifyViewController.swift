@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class VerifyViewController: UIViewController {
     
+    var newUser = Int()
     var mobile = String()
     var timer = Timer()
     var time = 60
@@ -34,6 +35,8 @@ class VerifyViewController: UIViewController {
     
     @IBOutlet weak var resendButton: UIButton!
     
+    @IBOutlet weak var timerLabel: UILabel!
+    
     override func viewDidAppear(_ animated: Bool) {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.decreaseTime), userInfo: nil, repeats: true)
     }
@@ -41,18 +44,39 @@ class VerifyViewController: UIViewController {
     @objc func decreaseTime(){
         if time > 0{
             time -= 1
+            timerLabel.text = "(" + String(time) + ")"
             
         }else{
-            timer.invalidate()
-            
+//            timer.invalidate()
             resendButton.isEnabled = true
+            resendButton.alpha = 1
+            timerLabel.text = ""
+            
+            
         }
     }
+    
+    @IBAction func resendAction(_ sender: Any) {
+        time = 60
+        resendButton.isEnabled = false
+        resendButton.alpha = 0.5
+        // call API
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.optCodeText()
         soorajIcon.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        if newUser == 0 {
+            nameTextField.isHidden = true
+            nameLabel.isHidden = true
+            reagentLabel.isHidden = true
+            reagentTextField.isHidden = true
+        }
+        timerLabel.text = "(60)"
+        resendButton.alpha = 0.5
     }
     
     func checkErrors() -> Bool {
@@ -84,18 +108,20 @@ class VerifyViewController: UIViewController {
                 switch response.result{
                 case .success:
                     if response.result.value != nil{
+                        
                         let json = JSON(response.result.value!)
                         let resultJson = json["result"]
-                        UserDefaults.standard.set(resultJson, forKey: "user")
+                        let token = "Barear " + resultJson["token"].stringValue
+                        UserDefaults.standard.set(token, forKey: "token")
                         self.performSegue(withIdentifier: "loginSegue", sender: self)
                     }
                 case .failure(let error):
                     print(error)
-//                    if response.result.value != nil{
-//                        let json = JSON(response.result.value!)
-//                        self.mobileLabel.textColor = UIColor.red
-//                        self.mobileLabel.text = json["message"].stringValue
-//                    }
+                    //                    if response.result.value != nil{
+                    //                        let json = JSON(response.result.value!)
+                    //                        self.mobileLabel.textColor = UIColor.red
+                    //                        self.mobileLabel.text = json["message"].stringValue
+                    //                    }
                 }
             }
         } else {
@@ -104,11 +130,11 @@ class VerifyViewController: UIViewController {
     }
     
     func optCodeText(){
-        let attrs1 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 14), NSAttributedStringKey.foregroundColor : UIColor.white]
+        let attrs1 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 13), NSAttributedStringKey.foregroundColor : UIColor.white]
         
-        let attrs2 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 14), NSAttributedStringKey.foregroundColor : UIColor.yellow]
+        let attrs2 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 13), NSAttributedStringKey.foregroundColor : UIColor.yellow]
         
-        let attrs3 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 14), NSAttributedStringKey.foregroundColor : UIColor.white]
+        let attrs3 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 13), NSAttributedStringKey.foregroundColor : UIColor.white]
         
         let attributedString1 = NSMutableAttributedString(string:"کد تاییدی ارسالی به شماره ", attributes:(attrs1 as Any as! [NSAttributedStringKey : Any]))
         
@@ -122,9 +148,32 @@ class VerifyViewController: UIViewController {
     }
     
     
-    @IBAction func resendAction(_ sender: Any) {
-        
+    
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        enterButton.isEnabled = true
+        enterButton.alpha = 1
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
     }
-   
-
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    // Hide the keyboard when the return key pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
