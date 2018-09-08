@@ -110,11 +110,11 @@ class VerifyViewController: UIViewController {
         
         let attrs3 = [NSAttributedStringKey.font : UIFont(name: "IRANSansMobile", size: 14), NSAttributedStringKey.foregroundColor : UIColor.white]
         
-        let attributedString1 = NSMutableAttributedString(string:"کد تاییدی ارسالی به شماره ", attributes:attrs1)
+        let attributedString1 = NSMutableAttributedString(string:"کد تاییدی ارسالی به شماره ", attributes:(attrs1 as Any as! [NSAttributedStringKey : Any]))
         
-        let attributedString2 = NSMutableAttributedString(string: mobile, attributes:attrs2)
+        let attributedString2 = NSMutableAttributedString(string: mobile, attributes:attrs2 as Any as? [NSAttributedStringKey : Any])
         
-        let attributedString3 = NSMutableAttributedString(string:" را وارد نمایید.", attributes:attrs3)
+        let attributedString3 = NSMutableAttributedString(string:" را وارد نمایید.", attributes:(attrs3 as Any as! [NSAttributedStringKey : Any]))
         
         attributedString1.append(attributedString2)
         attributedString1.append(attributedString3)
