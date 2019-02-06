@@ -74,7 +74,7 @@ class VerifyViewController: UIViewController {
         super.viewDidLoad()
         self.optCodeText()
         logoIcon.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
-        logoIcon.image = UIImage(named: "Splash-logo.png")
+        logoIcon.image = UIImage(named: "splashLogo")
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         if newUser == 0 {
@@ -128,6 +128,24 @@ class VerifyViewController: UIViewController {
                         let resultJson = json["results"]
                         let token = "Bearer " + resultJson["token"].stringValue
                         UserDefaults.standard.set(token, forKey: "token")
+                        Utility.getRequest(view: self.view , methodName: "application/index", header: true) {
+                            (result) in
+                            if (result["success"].intValue == 1)
+                            {
+                                let jsn = result["results"]
+                                let mobile = jsn["mobile"].stringValue
+                                UserDefaults.standard.set(mobile, forKey: "mobile")
+                                
+                                let json = jsn["groups"].arrayValue
+                                for jsoon in json {
+                                    let groupId = jsoon["id"].intValue
+                                    UserDefaults.standard.set(groupId, forKey: "groupId")
+                                    let user = jsoon["pivot"]
+                                    let userId = user["user_id"].intValue
+                                    UserDefaults.standard.set(userId, forKey: "userId")
+                                }
+                            }
+                        }
                         self.performSegue(withIdentifier: "loginSegue", sender: self)
                     }
                 case .failure(let error):

@@ -136,7 +136,6 @@ class ViewController: UIViewController , UITextFieldDelegate {
             tokenString = token as! String
         }
         let header = ["Authorization" : tokenString]
-        print(tokenString)
         Alamofire.request(Const.BASE_URL + "application/start", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().responseJSON { response in
             switch response.result{
             case .success:
@@ -222,7 +221,7 @@ class ViewController: UIViewController , UITextFieldDelegate {
         
         mobileText.delegate = self
         logoIcon.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
-        logoIcon.image = UIImage(named: "Splash-logo.png")
+        logoIcon.image = UIImage(named: "splashLogo")
         
         
         

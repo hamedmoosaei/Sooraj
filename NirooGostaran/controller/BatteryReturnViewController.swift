@@ -129,6 +129,7 @@ class BatteryReturnViewController: UIViewController {
         codeTextfield.font = UIFont(name: "IRANSansMobile", size: 14)
         codeTextfield.placeholder = "کد باتری را وارد کنید"
         codeTextfield.keyboardType = .numberPad
+        codeTextfield.clearButtonMode = .always
         
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -548,7 +549,9 @@ class BatteryReturnViewController: UIViewController {
         mobileTextField.placeholder = "شماره موبایل"
         mobileTextField.keyboardType = .numberPad
         mobileTextField.text = UserDefaults.standard.object(forKey: "mobile") as? String
-        
+        mobileTextField.clearButtonMode = .always
+        mobileTextField.borderWidth = 3
+        mobileTextField.borderColor = UIColor(red: 220/255.0, green: 220/255.0, blue: 220/255.0, alpha: 1)
         
         
         let returnBtn = UIButton()

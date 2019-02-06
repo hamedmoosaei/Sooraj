@@ -45,6 +45,10 @@ class WarrantyActivateViewController: UIViewController , UITextFieldDelegate {
     let centerTextField = UITextField()
     let leftTextField = UITextField()
     
+    let arrowDown1 = UIImageView(image: UIImage(named: "downIcon"))
+    let arrowDown2 = UIImageView(image: UIImage(named: "downIcon"))
+    let arrowDown3 = UIImageView(image: UIImage(named: "downIcon"))
+    
     var textFieldCounter = 1
     
     override func viewDidLoad() {
@@ -150,6 +154,7 @@ class WarrantyActivateViewController: UIViewController , UITextFieldDelegate {
         codeTextfield.font = UIFont(name: "IRANSansMobile", size: 14)
         codeTextfield.placeholder = "کد باتری را وارد کنید"
         codeTextfield.keyboardType = .numberPad
+        codeTextfield.clearButtonMode = .always
         
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -610,7 +615,7 @@ class WarrantyActivateViewController: UIViewController , UITextFieldDelegate {
         mobileTextField.placeholder = "شماره موبایل"
         mobileTextField.keyboardType = .numberPad
         mobileTextField.text = UserDefaults.standard.object(forKey: "mobile") as? String
-        
+        mobileTextField.clearButtonMode = .always
         
         let calendarIcon = UIImageView(image :UIImage(named: "calendarIcon"))
         calendarIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -898,6 +903,21 @@ class WarrantyActivateViewController: UIViewController , UITextFieldDelegate {
         activeBtn.setTitleColor(UIColor.white, for: .normal)
         
         activeBtn.addTarget(self, action: #selector(activeButtonTapped(_:)), for: UIControlEvents.touchUpInside)
+        
+        for v in [mobileTextField,carAgeBtn,carTypeBtn,plateTypeBtn,leftTextField,centerTextField,rightTextField,irTextField]{
+            v.borderWidth = 3
+            v.borderColor = UIColor(red: 220/255.0, green: 220/255.0, blue: 220/255.0, alpha: 1)
+        }
+        carAgeBtn.addSubview(arrowDown1)
+        carTypeBtn.addSubview(arrowDown2)
+        plateTypeBtn.addSubview(arrowDown3)
+        for v in [arrowDown1,arrowDown2,arrowDown3]{
+            NSLayoutConstraint(item: v, attribute: .left, relatedBy: .equal, toItem: v.superview, attribute: .left, multiplier: 1, constant: 10).isActive = true
+            NSLayoutConstraint(item: v, attribute: .centerY, relatedBy: .equal, toItem: v.superview, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+            NSLayoutConstraint(item: v, attribute: .height, relatedBy: .equal, toItem: v.superview, attribute: .height, multiplier: 0.3, constant: 0).isActive = true
+            NSLayoutConstraint(item: v, attribute: .width, relatedBy: .equal, toItem: v.superview, attribute: .height, multiplier: 0.2, constant: 0).isActive = true
+            v.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     @objc func completeTextField(_ sender:UITextField){
         switch sender {

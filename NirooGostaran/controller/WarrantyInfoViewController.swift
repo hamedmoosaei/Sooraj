@@ -124,6 +124,7 @@ class WarrantyInfoViewController: UIViewController {
         codeTextfield.font = UIFont(name: "IRANSansMobile", size: 14)
         codeTextfield.placeholder = "کد باتری را وارد کنید"
         codeTextfield.keyboardType = .numberPad
+        codeTextfield.clearButtonMode = .always
         
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false

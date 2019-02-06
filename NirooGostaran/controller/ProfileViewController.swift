@@ -19,6 +19,19 @@ class ProfileViewController: UIViewController {
     let contactDetailView : UIView = UIView()
     let cityDetailView : UIView = UIView()
     
+    let editBtn = UIButton()
+    let namelabel = UILabel()
+    let nameTextField = UITextField()
+    let familyTextField = UITextField()
+    let genderBtn = UIButton()
+    let mobileTextField = UITextField()
+    let phoneTextField = UITextField()
+    let mailTextField = UITextField()
+    
+    let arrowDown1 = UIImageView(image: UIImage(named: "downIcon"))
+    let arrowDown2 = UIImageView(image: UIImage(named: "downIcon"))
+    let arrowDown3 = UIImageView(image: UIImage(named: "downIcon"))
+    
     let provinceDropDown = DropDown()
     let cityDropDown = DropDown()
     
@@ -28,21 +41,23 @@ class ProfileViewController: UIViewController {
     let provinceBtn = UIButton()
     let cityBtn = UIButton()
     
-    var lock = 0
-    var provinceArray = Array<Int>(){
-        didSet {
-            if provinceArray.count != 0 {
-                provinceDropDown.selectRow(at: 0)
-            }
-            provinceBtn.setTitle(self.provinceDropDown.selectedItem, for: .normal)
-            if lock == 0{
-                lock = 1
-                provinceValue = self.provinceArray[0]
-                self.getCities(id: self.provinceValue)
-            }
-        }
-    }
-    var cityArray = Array<Int>(){
+//    var lock = 0
+    var provinceArray = Array<Int>()
+//    {
+//        didSet {
+//            if provinceArray.count != 0 {
+//                provinceDropDown.selectRow(at: 0)
+//            }
+//            provinceBtn.setTitle(self.provinceDropDown.selectedItem, for: .normal)
+//            if lock == 0{
+//                lock = 1
+//                provinceValue = self.provinceArray[0]
+//                self.getCities(id: self.provinceValue)
+//            }
+//        }
+//    }
+    var cityArray = Array<Int>()
+    {
         didSet {
             if cityArray.count != 0 {
                 cityDropDown.selectRow(at: 0)
@@ -55,7 +70,7 @@ class ProfileViewController: UIViewController {
     
     let genderDropDown = DropDown()
     var genderValue = 0
-    var genderArray = [0,1]
+    var genderArray = [1,2]
     
     
     let dateTextField = UITextField()
@@ -65,7 +80,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         topViewinit(titleString: "پروفایل")
         hideKeyboardWhenTappedAround()
-        getProvinces()
+        getInfo()
+        //getProvinces()
         defaultInit()
         avatarViewInit()
         userDeatailViewInit()
@@ -124,30 +140,50 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
-    func getInfo(){
-        let temp = UserDefaults.standard.object(forKey: "userId") as! String
-        Utility.getRequest(view: view , methodName: "users/profile/" + temp, header: false) {
-            (result) in
+    func saveInfo(){
+        
+        let param =  ["first_name" : nameTextField.text! , "last_name" : familyTextField.text! , "email" : mailTextField.text! , "tel" : phoneTextField.text! , "birth_date" : dateTextField.text! , "gender" : genderValue , "province_id" : provinceValue , "city_id" : cityValue] as [String : Any]
+        
+        Utility.postRequest(view: view, methodName: "users/update", parameters: param, header: true)
+        { (result) in
             if (result["success"].intValue == 1)
             {
-                let jsn = result["results"].arrayValue
-                for json in jsn {
-                    self.provinceDropDown.dataSource.append(json["title"].stringValue)
-                    self.provinceArray.append(json["id"].intValue)
-                }
+//                let jsn = result["results"]
+//                print(jsn)
+            }
+            else{
+                print(result["user_message"].stringValue)
             }
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
+    func getInfo(){
+        let temp = UserDefaults.standard.object(forKey: "userId")!
+        let str = String(describing: temp)
+        Utility.getRequest(view: view , methodName: "users/profile/" + str, header: true) {
+            (result) in
+            if (result["success"].intValue == 1)
+            {
+                let json = result["results"]
+                let jsn = json["person"]
+//                print(result)
+                self.namelabel.text = jsn["first_name"].stringValue + " " + jsn["last_name"].stringValue
+                self.nameTextField.text = jsn["first_name"].stringValue
+                self.familyTextField.text = jsn["last_name"].stringValue
+                self.dateTextField.text = jsn["birth_date"].stringValue
+                self.genderBtn.setTitle(jsn["gender_label"].stringValue, for: .normal)
+                self.mobileTextField.text = jsn["mobile"].stringValue
+                self.phoneTextField.text = jsn["tel"].stringValue
+                self.mailTextField.text = jsn["email"].stringValue
+                self.provinceBtn.setTitle(jsn["province_label"].stringValue, for: .normal)
+                self.cityBtn.setTitle(jsn["city_label"].stringValue, for: .normal)
+                self.genderValue = jsn["gender"].intValue
+                self.provinceValue = jsn["province_id"].intValue
+                self.cityValue = jsn["city_id"].intValue
+            }
+        }
+    }
+
     func avatarViewInit(){
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         image.addSubview(avatarView)
@@ -174,13 +210,42 @@ class ProfileViewController: UIViewController {
         avatarImageView.image = UIImage(named: "avatarIcon")
         avatarImageView.contentMode = .scaleToFill
         
-        let namelabel = UILabel()
+        
         namelabel.translatesAutoresizingMaskIntoConstraints = false
         avatarView.addSubview(namelabel)
         NSLayoutConstraint(item: namelabel, attribute: .centerY, relatedBy: .equal, toItem: avatarView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: namelabel, attribute: .right, relatedBy: .equal, toItem: avatarImageView, attribute: .left, multiplier: 1, constant: -10).isActive = true
         namelabel.font = UIFont(name: "IRANSansMobile-Bold", size: 16)
-        namelabel.text = "حامد موسایی"
+        //namelabel.text = "حامد موسایی"
+        
+        
+        
+        
+        
+        editBtn.translatesAutoresizingMaskIntoConstraints = false
+        avatarView.addSubview(editBtn)
+        NSLayoutConstraint(item: editBtn, attribute: .top, relatedBy: .equal, toItem: avatarView, attribute: .top, multiplier: 1, constant: 10).isActive = true
+        NSLayoutConstraint(item: editBtn, attribute: .width, relatedBy: .equal, toItem: avatarView, attribute: .height, multiplier: 0.5, constant: 0).isActive = true
+        NSLayoutConstraint(item: editBtn, attribute: .left, relatedBy: .equal, toItem: avatarView, attribute: .left, multiplier: 1, constant: 5).isActive = true
+        NSLayoutConstraint(item: editBtn, attribute: .height, relatedBy: .equal, toItem: avatarView, attribute: .width, multiplier: 0.1, constant: 0).isActive = true
+        
+        editBtn.backgroundColor = UIColor(red: 200/255.0, green: 170/255.0, blue: 80/255.0, alpha: 1)
+        editBtn.cornerRadius = 7
+        editBtn.titleLabel?.textAlignment = .center
+        editBtn.titleLabel?.font = UIFont(name: "IRANSansMobile", size: 14)
+        editBtn.setTitleColor(UIColor.black, for: .normal)
+        editBtn.setTitle("ویرایش", for: .normal)
+        
+        editBtn.tag = 1
+        
+        editBtn.addTarget(self, action: #selector(editButtonTapped(_:)), for: UIControlEvents.touchUpInside)
+        
+        
+        
+        
+        
+        
+        
         
     }
     
@@ -189,7 +254,7 @@ class ProfileViewController: UIViewController {
         image.addSubview(userDeatailView)
         NSLayoutConstraint(item: userDeatailView, attribute: .centerX, relatedBy: .equal, toItem: image, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: userDeatailView, attribute: .width, relatedBy: .equal, toItem: image, attribute: .width, multiplier: 0.92, constant: 0).isActive = true
-        NSLayoutConstraint(item: userDeatailView, attribute: .height, relatedBy: .equal, toItem: image, attribute: .width, multiplier: 0.6, constant: 0).isActive = true
+        NSLayoutConstraint(item: userDeatailView, attribute: .height, relatedBy: .equal, toItem: image, attribute: .width, multiplier: 0.62, constant: 0).isActive = true
         NSLayoutConstraint(item: userDeatailView, attribute: .top, relatedBy: .equal, toItem: avatarView, attribute: .bottom, multiplier: 1, constant: 15).isActive = true
         
         userDeatailView.backgroundColor = .white
@@ -214,7 +279,7 @@ class ProfileViewController: UIViewController {
         userDetailText.font = UIFont(name: "IRANSansMobile-Bold", size: 15)
         userDetailText.textAlignment = .right
         
-        let nameTextField = UITextField()
+        
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         userDeatailView.addSubview(nameTextField)
         NSLayoutConstraint(item: nameTextField, attribute: .top, relatedBy: .equal, toItem: userDetailText, attribute: .bottom, multiplier: 1, constant: 15).isActive = true
@@ -228,8 +293,8 @@ class ProfileViewController: UIViewController {
         nameTextField.font = UIFont(name: "IRANSansMobile", size: 14)
         nameTextField.placeholder = "نام"
         nameTextField.keyboardType = .default
+        nameTextField.isEnabled = false
         
-        let familyTextField = UITextField()
         familyTextField.translatesAutoresizingMaskIntoConstraints = false
         userDeatailView.addSubview(familyTextField)
         NSLayoutConstraint(item: familyTextField, attribute: .top, relatedBy: .equal, toItem: nameTextField, attribute: .bottom, multiplier: 1, constant: 10).isActive = true
@@ -243,7 +308,7 @@ class ProfileViewController: UIViewController {
         familyTextField.font = UIFont(name: "IRANSansMobile", size: 14)
         familyTextField.placeholder = "نام خانوادگی"
         familyTextField.keyboardType = .default
-        
+        familyTextField.isEnabled = false
         
         
         let callenderIcon = UIImageView(image :UIImage(named: "calendarIcon"))
@@ -283,7 +348,7 @@ class ProfileViewController: UIViewController {
         dateTextField.font = UIFont(name: "IRANSansMobile", size: 14)
         dateTextField.placeholder = "تاریخ تولد"
         dateTextField.keyboardType = .default
-        
+        dateTextField.isEnabled = false
         
         let persianDatePicker = PersianDatePickerView(frame: CGRect(x: 0, y: 0, width: 200, height: 250))
         persianDatePicker.style = .long
@@ -318,14 +383,16 @@ class ProfileViewController: UIViewController {
         genderlabel.font = UIFont(name: "IRANSansMobile", size: 14)
         genderlabel.textAlignment = .right
         
-        let genderBtn = UIButton()
+        
         genderBtn.translatesAutoresizingMaskIntoConstraints = false
         userDeatailView.addSubview(genderBtn)
         NSLayoutConstraint(item: genderBtn, attribute: .top, relatedBy: .equal, toItem: dateTextField, attribute: .bottom, multiplier: 1, constant: 10).isActive = true
         NSLayoutConstraint(item: genderBtn, attribute: .right, relatedBy: .equal, toItem: genderlabel, attribute: .left, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: genderBtn, attribute: .left, relatedBy: .equal, toItem: familyTextField, attribute: .left, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: genderBtn, attribute: .height, relatedBy: .equal, toItem: userDeatailView, attribute: .width, multiplier: 0.1, constant: 0).isActive = true
-        genderBtn.backgroundColor = UIColor(red: 238/255.0, green: 242/255.0, blue: 236/255.0, alpha: 1)
+        
+        genderBtn.isEnabled = false
+//        genderBtn.addSubview(<#T##view: UIView##UIView#>)
         
         genderBtn.backgroundColor = UIColor(red: 238/255.0, green: 242/255.0, blue: 236/255.0, alpha: 1)
         genderBtn.cornerRadius = 7
@@ -341,6 +408,7 @@ class ProfileViewController: UIViewController {
         genderDropDown.textFont = UIFont(name: "IRANSansMobile", size: 14)!
         genderDropDown.selectionBackgroundColor = UIColor(red: 200/255.0, green: 170/255.0, blue: 80/255.0, alpha: 1)
         DropDown.appearance().setupCornerRadius(7)
+//        genderDropDown.
         genderDropDown.anchorView = genderBtn
         genderDropDown.direction = .bottom
         genderDropDown.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
@@ -348,7 +416,7 @@ class ProfileViewController: UIViewController {
             cell.optionLabel.textAlignment = .center
         }
         genderDropDown.selectionAction = { (index, item) in
-            genderBtn.setTitle(item, for: .normal)
+            self.genderBtn.setTitle(item, for: .normal)
             self.genderValue = self.genderArray[index]
         }
         genderBtn.addTarget(self, action: #selector(genderDropDownButtonTapped(_:)), for: UIControlEvents.touchUpInside)
@@ -408,25 +476,25 @@ class ProfileViewController: UIViewController {
         
         //datelabel.backgroundColor = UIColor(red: 238/255.0, green: 242/255.0, blue: 236/255.0, alpha: 1)
         mobileLabel.text = "تلفن همراه"
-        mobileLabel.font = UIFont(name: "IRANSansMobile", size: 14)
+        mobileLabel.font = UIFont(name: "IRANSansMobile", size: 13)
         mobileLabel.textAlignment = .right
         
         
-        let mobileTextField = UITextField()
+        
         mobileTextField.translatesAutoresizingMaskIntoConstraints = false
         contactDetailView.addSubview(mobileTextField)
         NSLayoutConstraint(item: mobileTextField, attribute: .top, relatedBy: .equal, toItem: contactInfoText, attribute: .bottom, multiplier: 1, constant: 15).isActive = true
         NSLayoutConstraint(item: mobileTextField, attribute: .right, relatedBy: .equal, toItem: dateTextField, attribute: .right, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: mobileTextField, attribute: .left, relatedBy: .equal, toItem: dateTextField, attribute: .left, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: mobileTextField, attribute: .height, relatedBy: .equal, toItem: contactDetailView, attribute: .width, multiplier: 0.1, constant: 0).isActive = true
-        mobileTextField.backgroundColor = UIColor(red: 238/255.0, green: 242/255.0, blue: 236/255.0, alpha: 1)
+        mobileTextField.backgroundColor = UIColor(red: 200/255.0, green: 170/255.0, blue: 80/255.0, alpha: 1)
         mobileTextField.cornerRadius = 7
         mobileTextField.textAlignment = .center
         mobileTextField.keyboardAppearance = .dark
         mobileTextField.font = UIFont(name: "IRANSansMobile", size: 14)
         mobileTextField.placeholder = "شماره موبایل"
         mobileTextField.keyboardType = .phonePad
-        
+        mobileTextField.isEnabled = false
         
         let phoneIcon = UIImageView(image :UIImage(named: "phoneIcon"))
         phoneIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -451,7 +519,7 @@ class ProfileViewController: UIViewController {
         phoneLabel.textAlignment = .right
         
         
-        let phoneTextField = UITextField()
+        
         phoneTextField.translatesAutoresizingMaskIntoConstraints = false
         contactDetailView.addSubview(phoneTextField)
         NSLayoutConstraint(item: phoneTextField, attribute: .top, relatedBy: .equal, toItem: mobileTextField, attribute: .bottom, multiplier: 1, constant: 10).isActive = true
@@ -465,9 +533,8 @@ class ProfileViewController: UIViewController {
         phoneTextField.font = UIFont(name: "IRANSansMobile", size: 14)
         phoneTextField.placeholder = "شماره ثابت"
         phoneTextField.keyboardType = .phonePad
+        phoneTextField.isEnabled = false
         
-        
-        let mailTextField = UITextField()
         mailTextField.translatesAutoresizingMaskIntoConstraints = false
         contactDetailView.addSubview(mailTextField)
         NSLayoutConstraint(item: mailTextField, attribute: .top, relatedBy: .equal, toItem: phoneTextField, attribute: .bottom, multiplier: 1, constant: 10).isActive = true
@@ -481,7 +548,7 @@ class ProfileViewController: UIViewController {
         mailTextField.font = UIFont(name: "IRANSansMobile", size: 14)
         mailTextField.placeholder = "پست الکترونیک"
         mailTextField.keyboardType = .emailAddress
-        
+        mailTextField.isEnabled = false
     }
     
     func cityDetailViewInit() {
@@ -545,6 +612,7 @@ class ProfileViewController: UIViewController {
         NSLayoutConstraint(item: provinceBtn, attribute: .left, relatedBy: .equal, toItem: dateTextField, attribute: .left, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: provinceBtn, attribute: .height, relatedBy: .equal, toItem: cityDetailView, attribute: .width, multiplier: 0.1, constant: 0).isActive = true
         
+        provinceBtn.isEnabled = false
         provinceBtn.backgroundColor = UIColor(red: 238/255.0, green: 242/255.0, blue: 236/255.0, alpha: 1)
         
         provinceBtn.cornerRadius = 7
@@ -605,6 +673,7 @@ class ProfileViewController: UIViewController {
         NSLayoutConstraint(item: cityBtn, attribute: .left, relatedBy: .equal, toItem: dateTextField, attribute: .left, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: cityBtn, attribute: .height, relatedBy: .equal, toItem: cityDetailView, attribute: .width, multiplier: 0.1, constant: 0).isActive = true
         
+        cityBtn.isEnabled = false
         cityBtn.backgroundColor = UIColor(red: 238/255.0, green: 242/255.0, blue: 236/255.0, alpha: 1)
         
         cityBtn.cornerRadius = 7
@@ -671,7 +740,72 @@ class ProfileViewController: UIViewController {
     }
     
     
-    
+    @objc func editButtonTapped(_ sender:UIButton ){
+        switch sender.tag {
+        case 1:
+            sender.tag = 2
+            editBtn.setTitle("ذخیره", for: .normal)
+            editBtn.backgroundColor = UIColor(red: 80/255.0, green: 160/255.0, blue: 60/255.0, alpha: 1)
+            genderBtn.addSubview(arrowDown1)
+            provinceBtn.addSubview(arrowDown2)
+            cityBtn.addSubview(arrowDown3)
+            for v in [arrowDown1,arrowDown2,arrowDown3]{
+                NSLayoutConstraint(item: v, attribute: .left, relatedBy: .equal, toItem: v.superview, attribute: .left, multiplier: 1, constant: 10).isActive = true
+                NSLayoutConstraint(item: v, attribute: .centerY, relatedBy: .equal, toItem: v.superview, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+                NSLayoutConstraint(item: v, attribute: .height, relatedBy: .equal, toItem: v.superview, attribute: .height, multiplier: 0.3, constant: 0).isActive = true
+                NSLayoutConstraint(item: v, attribute: .width, relatedBy: .equal, toItem: v.superview, attribute: .height, multiplier: 0.2, constant: 0).isActive = true
+                v.translatesAutoresizingMaskIntoConstraints = false
+            }
+            getProvinces()
+            nameTextField.isEnabled = true
+            nameTextField.clearButtonMode = .always
+            familyTextField.clearButtonMode = .always
+            phoneTextField.clearButtonMode = .always
+            mailTextField.clearButtonMode = .always
+            familyTextField.isEnabled = true
+            dateTextField.isEnabled = true
+            genderBtn.isEnabled = true
+//            mobileTextField.isEnabled = true
+            phoneTextField.isEnabled = true
+            mailTextField.isEnabled = true
+            provinceBtn.isEnabled = true
+            cityBtn.isEnabled = true
+            for v in [nameTextField,familyTextField,dateTextField,genderBtn,phoneTextField,mailTextField,provinceBtn,cityBtn]{
+                v.borderWidth = 3
+                v.borderColor = UIColor(red: 220/255.0, green: 220/255.0, blue: 220/255.0, alpha: 1)
+            }
+            
+        case 2:
+            print("2")
+            sender.tag = 1
+            editBtn.setTitle("ویرایش", for: .normal)
+            editBtn.backgroundColor = UIColor(red: 200/255.0, green: 170/255.0, blue: 80/255.0, alpha: 1)
+            arrowDown1.removeFromSuperview()
+            arrowDown2.removeFromSuperview()
+            arrowDown3.removeFromSuperview()
+            
+            nameTextField.clearButtonMode = .never
+            familyTextField.clearButtonMode = .never
+            phoneTextField.clearButtonMode = .never
+            mailTextField.clearButtonMode = .never
+            saveInfo()
+            nameTextField.isEnabled = false
+            familyTextField.isEnabled = false
+            dateTextField.isEnabled = false
+            genderBtn.isEnabled = false
+            mobileTextField.isEnabled = false
+            phoneTextField.isEnabled = false
+            mailTextField.isEnabled = false
+            provinceBtn.isEnabled = false
+            cityBtn.isEnabled = false
+            for v in [nameTextField,familyTextField,dateTextField,genderBtn,phoneTextField,mailTextField,provinceBtn,cityBtn]{
+                v.borderWidth = 0
+            }
+            
+        default:
+            print("def")
+        }
+    }
     @objc func genderDropDownButtonTapped(_ sender:UIButton ){
         genderDropDown.show()
         //        sender.setTitle(dropDown.selectedItem, for: .normal)

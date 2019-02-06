@@ -14,7 +14,7 @@ import Toast_Swift
 class Utility {
     
     public static func getRequest(view: UIView, methodName: String, header: Bool, completionHandler: @escaping (JSON) -> Void) -> Void {
-        
+//        print(methodName)
         view.makeToastActivity(.center)
         
         var headers: HTTPHeaders? = nil
